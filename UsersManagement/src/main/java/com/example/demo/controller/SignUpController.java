@@ -19,29 +19,29 @@ public class SignUpController {
 
 	private final UsersService usersService;
 
-	@GetMapping("/users-input")
+	@GetMapping("/sign-up")
 	public String getView(UsersForm usersForm) {
-		return "users-input";
+		return "sign-up";
 	}
 
 	// 新規作成
-	@PostMapping("/users-input")
+	@PostMapping("/sign-up")
 	public String postView(@Valid UsersForm usersForm, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
-			return "users-input";
+			return "sign-up";
 		}
 		
 		if (usersService.findByUserId(usersForm.getUserId()).isPresent()) {
 			
 			model.addAttribute("duplicationError", "このユーザーIDは既に使用されています");
 
-			return "users-input";
+			return "sign-up";
 		}
 
 		usersService.save(usersForm);
 
-		return "users-input";
+		return "sign-up";
 	}
 
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>一覧</title>
+</head>
+
+<body>
+
+	<h2>Users一覧</h2>
+
+	<form th:action="@{/users-view}" th:object="${usersForm}" method="get">
+		<input type="text" th:field="*{name}" placeholder="名前を検索">
+		<button type="submit">検索</button>
+	</form>
+
+	<ul>
+		<li th:each="user : ${users}">
+			<span>ユーザーID :</span>
+			<span th:text="${user.userId}"></span>
+			<span> 名前 :</span>
+			<span th:text="${user.name}"></span>
+		</li>
+	</ul>
+
+	<a th:href="@{/users-input}">登録画面へ</a>
+	<a th:href="@{/logout}">ログアウト</a>
+
+</body>
+
+</html>

@@ -17,5 +17,8 @@ public class UsersForm {
     @NotBlank
     private String role = "ROLE_USER";
     
+    @NotBlank(message="名前は必須です!!")
     private String name;
+    
+    private String mail;
 }

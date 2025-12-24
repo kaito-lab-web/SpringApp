@@ -20,4 +20,11 @@ public class LoginController {
 		
 		return "login";
 	}
+	
+	// localhost:8090/もログイン画面に遷移
+	@GetMapping("/")
+	public String view() {
+	    
+	    return "redirect:/login";
+	}
 }

@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,18 +30,27 @@ public class UsersService {
 		return usersRepository.findUsers(usersName);
 	}
 
-	public void save(UsersForm form) {
+	public void save(UsersForm userForm) {
 		
 		Users user = new Users();
 		
-		user.setUserId(form.getUserId());
-		user.setPassword(passwordEncoder.encode(form.getPassword()));
-		user.setRole(form.getRole());
+		user.setUserId(userForm.getUserId());
+		user.setPassword(passwordEncoder.encode(userForm.getPassword()));
+		user.setRole(userForm.getRole());
+		user.setName(userForm.getName());
+		user.setMail(userForm.getMail());
+		user.setAddDate(LocalDateTime.now());
+		user.setLastLoginDate(LocalDateTime.now());
+		user.setAddountEnable(true);
 		
 		usersRepository.save(user);
 	}
 	
 	public Optional<Users> findByUserId(String userId){
 		return usersRepository.findByUserId(userId);
+	}
+	
+	public Optional<Users> findByMail(String mail){
+		return usersRepository.findByMail(mail);
 	}
 }

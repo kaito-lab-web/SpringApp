@@ -11,8 +11,11 @@ public class UsersForm {
 	@Size(min= 1, max = 10, message = "1～4桁を入力してください")
     private String userId;
 	
-    private String name;
-    
     @NotBlank(message="パスワードは必須です!!")
     private String password;
+    
+    @NotBlank
+    private String role = "user";
+    
+    private String name;
 }

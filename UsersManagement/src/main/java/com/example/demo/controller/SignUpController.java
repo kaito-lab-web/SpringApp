@@ -35,10 +35,9 @@ public class SignUpController {
 		if (usersService.findByUserId(usersForm.getUserId()).isPresent()) {
 			
 			model.addAttribute("duplicationError", "このユーザーIDは既に使用されています");
-
 			return "sign-up";
 		}
-
+		
 		usersService.save(usersForm);
 
 		return "sign-up";

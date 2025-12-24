@@ -13,7 +13,7 @@ public class Users {
 	@Id
     @Column(name = "user_id")
     private String userId;
-
-    private String name;
     private String password;
+    private String role;
+    private String name;
 }

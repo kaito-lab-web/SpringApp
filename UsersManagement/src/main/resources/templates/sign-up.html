@@ -9,7 +9,7 @@
 <body>
 
 	<h2>Users登録</h2>
-	
+
 	<p th:if="${duplicationError}" th:text="${duplicationError}" style="color:red;"></p>
 
 	<form th:action="@{/sign-up}" th:object="${usersForm}" method="post">
@@ -20,12 +20,18 @@
 			<label>ユーザーID</label>
 			<input type="text" th:field="*{userId}">
 		</div>
-		
+
 		<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red;"></p>
 
 		<div>
 			<label>パスワード</label>
 			<input type="password" th:field="*{password}">
+		</div>
+
+		<div>
+			<label>権限</label>
+				<input type="radio" th:field="*{role}" value="user" /> 一般
+				<input type="radio" th:field="*{role}" value="admin" /> 監理者
 		</div>
 
 		<button type="submit">登録</button>

@@ -35,6 +35,7 @@ public class UsersService {
 		
 		user.setUserId(form.getUserId());
 		user.setPassword(passwordEncoder.encode(form.getPassword()));
+		user.setRole(form.getRole());
 		
 		usersRepository.save(user);
 	}

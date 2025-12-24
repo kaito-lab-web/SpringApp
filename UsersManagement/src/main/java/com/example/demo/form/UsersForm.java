@@ -15,7 +15,7 @@ public class UsersForm {
     private String password;
     
     @NotBlank
-    private String role = "user";
+    private String role = "ROLE_USER";
     
     private String name;
 }

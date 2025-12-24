@@ -4,7 +4,7 @@ CREATE TABLE users (
 	
     user_id VARCHAR(50) PRIMARY KEY 
 ,	password VARCHAR(255) NOT NULL
-,	role VARCHAR(10) NOT NULL
+,	role VARCHAR(15) NOT NULL
 ,	name VARCHAR(255) UNIQUE
 ,	email VARCHAR(255) 
 );

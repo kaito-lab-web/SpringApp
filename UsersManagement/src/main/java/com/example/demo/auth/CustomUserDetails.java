@@ -9,19 +9,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.demo.entity.Users;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 public class CustomUserDetails implements UserDetails {
 	
 	private final Users user;
-	
-	// Usersクラスを受け取ってる
-	public CustomUserDetails(Users user) {
-		this.user = user;
-	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// ロール（権限）を返します。今回は一律 USER とします
-		return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+		
+		return Collections.singletonList(new SimpleGrantedAuthority(user.getRole()));
 	}
 
 	@Override

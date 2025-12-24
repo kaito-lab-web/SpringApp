@@ -14,6 +14,6 @@ public class Users {
     @Column(name = "user_id")
     private String userId;
     private String password;
-    private String role;
+    private String role; // 権限
     private String name;
 }

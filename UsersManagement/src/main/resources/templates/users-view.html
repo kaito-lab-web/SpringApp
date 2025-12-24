@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 	<meta charset="UTF-8">
@@ -9,6 +9,22 @@
 <body>
 
 	<h2>Users一覧</h2>
+
+	<div>
+		<p>ログイン : <span sec:authentication="name">null</span></p>
+	</div>
+
+	<div sec:authorize="hasRole('ADMIN')">
+		<h3>管理者通知</h3>
+		<p>このメッセージは監理者しか閲覧できません</p>
+	</div>
+
+	<div sec:authorize="hasRole('USER')">
+		<h3>ユーザー通知</h3>
+		<p>このメッセージは一般しか閲覧できません</p>
+	</div>
+
+	<hr>
 
 	<form th:action="@{/users-view}" th:object="${usersForm}" method="get">
 		<input type="text" th:field="*{name}" placeholder="名前を検索">

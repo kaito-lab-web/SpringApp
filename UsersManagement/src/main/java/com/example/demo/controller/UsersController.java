@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,9 @@ public class UsersController {
 	private final UsersService usersService;
 	
 	@GetMapping("/users-view")
-	public String view(UsersForm usersForm, Model model) {
+	public String view(UsersForm usersForm, Model model, Principal principal) {
+		
+		System.out.println("ログイン中のユーザー: " + principal.getName());
 
 		List<Users> users;
 		

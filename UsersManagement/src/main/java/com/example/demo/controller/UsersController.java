@@ -22,7 +22,7 @@ public class UsersController {
 	@GetMapping("/users-view")
 	public String view(UsersForm usersForm, Model model, Principal principal) {
 		
-		System.out.println("!!!!!!ログイン中のユーザー: " + principal.getName());
+		System.out.println("ログイン中のユーザー: " + principal.getName());
 
 		List<Users> users;
 		

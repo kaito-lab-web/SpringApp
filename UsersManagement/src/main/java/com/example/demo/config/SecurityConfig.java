@@ -63,11 +63,19 @@ public class SecurityConfig {
 						.logoutUrl("/logout")
 						.logoutSuccessUrl("/login?logout"));
 
-		// 5. H2コンソールの表示設定（CSRF無効化は上でやったので、これだけでOK）
+		// 5. H2コンソールの表示設定
 		http.headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()));
 
 		return http.build();
 	}
+	
+	/**
+	 * @Configuration が記述されてるクラスのクラス内で設定可能
+	 * アプリ全体でインスタンスして使用するものPasswordEncoder（パスワード比較のたびにインスタンス不要）
+	 * 
+	 * アプリ起動時に1回だけ呼び出してnewしたものをSpringに渡す
+	 * Springは何度もインスタンスせずに渡されたものを使いまわせる
+	 */
 
 	@Bean
 	PasswordEncoder passwordEncoder() {

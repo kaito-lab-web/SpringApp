@@ -8,7 +8,8 @@ import lombok.Data;
 @Data
 public class UsersForm {
 	
-	@Size(min= 1, max = 10, message = "1～4桁を入力してください")
+	@NotBlank(message = "ユーザーIDは必須です")
+    @Size(min = 1, max = 10, message = "1～10文字で入力してください")
     private String userId;
 	
     @NotBlank(message="パスワードは必須です!!")

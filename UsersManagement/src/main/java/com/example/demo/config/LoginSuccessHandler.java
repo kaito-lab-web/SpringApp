@@ -33,6 +33,6 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 		});
 
 		// 遷移先へ移動させる
-		response.sendRedirect("/users-view");
+		response.sendRedirect("/menu");
 	}
 }

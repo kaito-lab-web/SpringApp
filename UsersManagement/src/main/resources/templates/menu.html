@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{common/layout :: layout(~{::section}, 'メニュー', _)}">
+
+<body>
+	<section>
+		<div class="container text-center">
+			<h1 class="mb-4">メインメニュー</h1>
+			<p>操作を選択してください。</p>
+			<div class="list-group col-md-6 mx-auto">
+				<a th:href="@{/users-view}" class="list-group-item list-group-item-action">ユーザー管理画面へ</a>
+				<a th:href="@{/sign-up}" class="list-group-item list-group-item-action">登録画面へ</a>
+				
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{common/layout :: layout(~{::section}, 'ユーザー情報変更', _)}">
+
+<body>
+	<section>
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+					<h1 class="text-center mb-4">ユーザー情報変更</h1>
+
+					<div th:if="${param.success}" class="alert alert-success">
+						ユーザー情報を更新しました。
+					</div>
+
+					<form th:action="@{/user-edit}" th:method="post" th:object="${userEditForm}">
+
+						<div class="mb-3">
+							<label for="name" class="form-label">名前</label>
+							<input type="text" th:field="*{name}" class="form-control" th:errorclass="is-invalid">
+							<div class="invalid-feedback" th:errors="*{name}"></div>
+						</div>
+
+						<div class="mb-3">
+							<label for="mail" class="form-label">メールアドレス</label>
+							<input type="email" th:field="*{mail}" class="form-control" th:errorclass="is-invalid">
+							<div class="invalid-feedback" th:errors="*{mail}"></div>
+						</div>
+
+						<hr class="my-4">
+
+						<div class="mb-3">
+							<label for="currentPassword" class="form-label">現在のパスワード</label>
+							<input type="password" th:field="*{currentPassword}" class="form-control"
+								th:errorclass="is-invalid">
+							<div class="invalid-feedback" th:errors="*{currentPassword}"></div>
+						</div>
+
+						<div class="mb-3">
+							<label for="newPassword1" class="form-label">新しいパスワード</label>
+							<input type="password" th:field="*{newPassword1}" class="form-control"
+								th:errorclass="is-invalid">
+							<div class="invalid-feedback" th:errors="*{newPassword1}"></div>
+						</div>
+
+						<div class="mb-3">
+							<label for="newPassword2" class="form-label">新しいパスワード（再入力）</label>
+							<input type="password" th:field="*{newPassword2}" class="form-control"
+								th:errorclass="is-invalid">
+							<div class="invalid-feedback" th:errors="*{newPassword2}"></div>
+						</div>
+
+						<div class="text-center mt-4">
+							<button type="submit" class="btn btn-primary w-100">更新する</button>
+							<a th:href="@{/menu}" class="btn btn-link mt-2">戻る</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>

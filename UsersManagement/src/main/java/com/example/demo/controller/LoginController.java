@@ -8,24 +8,22 @@ import com.example.demo.form.LoginForm;
 
 @Controller
 public class LoginController {
-	
-	// @ModelAttribute
+
 	/**
+	 * @ModelAttribute
 	 * ユーザーが画面で「名前」を入力して送信したときにその値を自動的に
 	 * UsersFormのフィールド（name）にセットしてくれる
-	 * 
 	 */
-	
 	@GetMapping("/login")
 	public String view(@ModelAttribute LoginForm loginForm) {
-		
+		// return "login" は、src/main/resources/templates/login.html を指す
 		return "login";
 	}
-	
-	// localhost:8090/もログイン画面に遷移
+
+	// localhost:8090/ アクセス時もログイン画面にリダイレクトさせる
 	@GetMapping("/")
 	public String view() {
-	    
-	    return "redirect:/login";
+		// redirect: をつけると、ブラウザのURL自体が書き換わる
+		return "redirect:/login";
 	}
 }

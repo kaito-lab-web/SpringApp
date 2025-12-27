@@ -12,9 +12,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration // 設定クラスファイルを表す
 @EnableWebSecurity // Spring Securityを有効
 public class SecurityConfig {
-	
+
 	@Autowired
-    private LoginSuccessHandler loginSuccessHandler;
+	private LoginSuccessHandler loginSuccessHandler;
 
 	/**
 	 * アクセス制限（誰が通れるか）＆ ログイン方法（どうやって入るか）を設定してる
@@ -68,7 +68,7 @@ public class SecurityConfig {
 
 		return http.build();
 	}
-	
+
 	/**
 	 * @Configuration が記述されてるクラスのクラス内で設定可能
 	 * アプリ全体でインスタンスして使用するものPasswordEncoder（パスワード比較のたびにインスタンス不要）

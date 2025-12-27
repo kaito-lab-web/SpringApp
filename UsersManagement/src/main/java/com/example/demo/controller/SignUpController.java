@@ -23,54 +23,50 @@ public class SignUpController {
 
 	private final UsersService usersService;
 
+	/**
+	 * 新規登録画面の表示 (GET)
+	 * @param usersForm フォームオブジェクト。
+	 * Thymeleafの th:object="${usersForm}" と紐付けるために空のインスタンスが必要。
+	 * @return 表示するHTMLのパス
+	 */
 	@GetMapping("/sign-up")
 	public String getView(UsersForm usersForm) {
+		// return "sign-up" により、src/main/resources/templates/sign-up.html を表示します
 		return "sign-up";
 	}
 
+	/**
+	 * 新規登録処理 (POST)
+	 */
 	@PostMapping("/sign-up")
 	public String postView(@Valid UsersForm usersForm, BindingResult result,
 			Model model, RedirectAttributes redirectAttributes) {
 
-		// バリデーションエラー
+		// 1. バリデーションエラー（入力必須チェックなど）
 		if (result.hasErrors()) {
 			return "sign-up";
 		}
 
-		// ユーザーIDの重複チェック
+		// 2. ID重複チェック
 		if (usersService.findByUserId(usersForm.getUserId()).isPresent()) {
 			model.addAttribute("duplicationError", "このユーザーIDは既に使用されています");
 			return "sign-up";
 		}
-		
-		// メールアドレス重複
-		// InitBinderのおかげで、未入力ならusersForm.getMail()はnullになっています
-	    if (usersForm.getMail() != null && usersService.findByMail(usersForm.getMail()).isPresent()) {
-	        model.addAttribute("duplicationError", "このメールアドレスは既に登録されています");
-	        return "sign-up";
-	    }
 
-		// 登録
+		// 3. 保存実行
 		usersService.save(usersForm);
-		
-		// 登録完了メッセージ
+
+		// RedirectAttributes: ブラウザのURLを書き換えるリダイレクト後でも、
+		// 一度だけメッセージを表示できる（フラッシュ属性）。
 		redirectAttributes.addFlashAttribute("successMessage", "ユーザー「" + usersForm.getName() + "」さんの新規登録が完了しました！");
 
-		// 登録画面へリダイレクト（これで成功メッセージが表示される）
+		// PRG(Post-Redirect-Get)パターン。登録後はGETリクエストへリダイレクトして二重送信を防止。
 		return "redirect:/sign-up";
-
 	}
-	
-	/**
-	 * 呼び出す必要はなく自動で適応される
-	 * @InitBinder が同じクラスにあるメソッドを見つけて実行する
-	 * 空文字をnullにしてくれる
-	 */
-	
-	@InitBinder
-    public void initBinder(WebDataBinder binder) {
-        // StringTrimmerEditor(true) が「空文字をnullにする」
-        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
-    }
 
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		// ユーザーが全角スペース等を入れた場合や未入力の場合、"" ではなく null として扱う設定
+		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+	}
 }

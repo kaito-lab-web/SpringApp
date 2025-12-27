@@ -27,21 +27,19 @@ public class PasswordResetController {
 	@PostMapping("/password-reset")
 	public String postView(@Valid PasswordResetForm passwordResetForm, BindingResult result, Model model) {
 
-		// バリデーションエラーがある場合
+		// 1. バリデーションエラー（@NotBlankなど）がある場合は画面に戻す
 		if (result.hasErrors()) {
 			return "password-reset";
 		}
 
-		// メールアドレスの存在チェック
+		// 2. サービスを使ってメールアドレスの存在チェック
 		var userOpt = passwordResetService.findByMail(passwordResetForm.getMail());
 
-		// メールアドレスの重複チェック
 		if (userOpt.isPresent()) {
-			
+			// 存在する場合：成功メッセージ
 			model.addAttribute("successMessage", "指定のメールアドレスに送信しました");
-			
 		} else {
-			
+			// 存在しない場合：エラーメッセージ
 			model.addAttribute("duplicationError", "入力されたメールアドレスは登録されていません");
 		}
 

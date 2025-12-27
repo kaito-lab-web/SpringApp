@@ -9,15 +9,19 @@ import com.example.demo.repository.PasswordResetRepository;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * パスワード再設定に関する業務ロジックを担当
+ */
 @Service
 @RequiredArgsConstructor
 public class PasswordResetService {
-	
+
 	private final PasswordResetRepository passwordResetRepository;
-	
-	
-	public Optional<Users> findByMail(String mail){
+
+	/**
+	 * メール送信先を確認するために、メールアドレスでユーザーの存在をチェックする
+	 */
+	public Optional<Users> findByMail(String mail) {
 		return passwordResetRepository.findByMail(mail);
 	}
-
 }
